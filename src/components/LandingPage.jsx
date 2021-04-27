@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import QuizContext from "./QuizContext";
+import config from "../config";
+import { toast } from "react-toastify";
 
 const LandingPage = () => {
-  let { setLandingPage, questions, setPetName } = useContext(QuizContext);
+  let { setLandingPage, questions, setPetName, petName } = useContext(
+    QuizContext
+  );
 
   let landingPageHandler = () => {
     setLandingPage(false);
@@ -12,6 +16,15 @@ const LandingPage = () => {
   let randomizeHandler = () => {
     setLandingPage(false);
     questions = shuffle(questions);
+  };
+
+  let petNameChangeHandler = (e) => {
+    if (petName.length < config.petNameMaxLength) {
+      setPetName(e.target.value);
+    } else {
+      e.target.value = petName;
+      toast.info(`Maximum name length is ${config.petNameMaxLength}`);
+    }
   };
 
   let shuffle = (arr) => {
@@ -41,7 +54,7 @@ const LandingPage = () => {
           placeholder="Name of the pet"
           aria-label="Name of the pet"
           aria-describedby="basic-addon2"
-          onChange={(e) => setPetName(e.target.value)}
+          onChange={(e) => petNameChangeHandler(e)}
         />
 
         <div>

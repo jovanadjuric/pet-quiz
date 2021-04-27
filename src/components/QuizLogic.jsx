@@ -17,9 +17,11 @@ const QuizLogic = ({ questions }) => {
             {choices.map((choice) => {
               return (
                 <Button
-                  className="mr-1 answer-btn"
+                  className="answer-btn w-100"
                   key={choice}
-                  onClick={(e) => handleAnswerClick(choice)}
+                  onClick={(e) =>
+                    handleAnswerClick(choice, questions[currentIndex]["_id"])
+                  }
                 >
                   {choice}
                 </Button>
@@ -52,9 +54,17 @@ const QuizLogic = ({ questions }) => {
     );
   };
 
-  let handleAnswerClick = (choice) => {
-    setAnswers([...answers, choice]);
+  let handleAnswerClick = (choice, questionId) => {
+    answers = [...answers, { answer: choice, questionId: questionId }];
+    setAnswers(answers);
+    let orderedAnswers = [];
+    for (let i = 0; i < answers.length; i++) {
+      orderedAnswers[answers[i]["questionId"]] = answers[i].answer;
+    }
     setCurrentIndex(currentIndex + 1);
+    if (currentIndex + 1 >= questions.length) {
+      setAnswers(orderedAnswers);
+    }
   };
 
   let handleResetClick = () => {
