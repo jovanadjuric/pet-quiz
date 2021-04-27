@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import QuizContext from "./QuizContext";
+// import QuizContext from "./QuizContext";
 
 const SingleQuestion = ({ questions }) => {
-  let { setCurrentStage } = useContext(QuizContext);
+  // let { setCurrentStage } = useContext(QuizContext);
   let [currentIndex, setCurrentIndex] = useState(0);
+  let [answers, setAnswers] = useState([]);
 
   let displayQuestions = () => {
     if (currentIndex < questions.length) {
@@ -12,30 +13,38 @@ const SingleQuestion = ({ questions }) => {
       return (
         <>
           <h3>{question}</h3>
-          {choices.map((choice) => {
-            return (
-              <Button onClick={(e) => answerClick(choice)} key={choice}>
-                {choice}
-              </Button>
-            );
-          })}
+          <div>
+            {choices.map((choice) => {
+              return (
+                <Button
+                  className="mr-1 answer-btn"
+                  key={choice}
+                  onClick={(e) => answerClick(choice)}
+                >
+                  {choice}
+                </Button>
+              );
+            })}
+          </div>
         </>
       );
     } else {
-      displayResult();
+      return displayResult();
     }
   };
 
   let answerClick = (choice) => {
-    console.log(choice);
+    setAnswers([...answers, choice]);
+
     setCurrentIndex(currentIndex + 1);
   };
 
   let displayResult = () => {
     return (
-      <>
-        My pet {}, and althrough he likes to {}, he really hates {}.
-      </>
+      <p>
+        My pet {answers[0]}, and althrough he likes to {answers[1]}, he really
+        hates {answers[2]}.
+      </p>
     );
   };
 
