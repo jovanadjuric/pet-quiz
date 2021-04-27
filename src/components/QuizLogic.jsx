@@ -5,7 +5,7 @@ import QuizContext from "./QuizContext";
 const QuizLogic = ({ questions }) => {
   let [currentIndex, setCurrentIndex] = useState(0);
   let [answers, setAnswers] = useState([]);
-  let { setLandingPage } = useContext(QuizContext);
+  let { setLandingPage, petName, setPetName } = useContext(QuizContext);
 
   let displayQuestions = () => {
     if (currentIndex < questions.length) {
@@ -37,8 +37,8 @@ const QuizLogic = ({ questions }) => {
     return (
       <>
         <p>
-          My pet {answers[0]}, and althrough he likes to {answers[1]}, he really
-          hates {answers[2]}.
+          My pet {petName} is {answers[0]}, and althrough he likes to{" "}
+          {answers[1]}, he really hates {answers[2]}.
         </p>
         <div>
           <Button className="btn-lg mr-1" onClick={handleResetClick}>
@@ -59,6 +59,7 @@ const QuizLogic = ({ questions }) => {
 
   let handleResetClick = () => {
     setLandingPage(true);
+    setPetName("");
   };
 
   let handleScrambleClick = () => {

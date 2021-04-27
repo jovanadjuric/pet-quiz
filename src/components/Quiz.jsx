@@ -8,6 +8,7 @@ import QuizContext from "./QuizContext";
 const Quiz = () => {
   let [questions, setQuestions] = useState([]);
   let [landingPage, setLandingPage] = useState(true);
+  let [petName, setPetName] = useState("");
 
   useEffect(() => {
     setQuestions(getQuestions());
@@ -19,6 +20,8 @@ const Quiz = () => {
         landingPage: true,
         setLandingPage,
         questions,
+        petName,
+        setPetName,
       }}
     >
       <Container>

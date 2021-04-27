@@ -3,8 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import QuizContext from "./QuizContext";
 
 const LandingPage = () => {
-  let { setLandingPage, questions } = useContext(QuizContext);
-  // context
+  let { setLandingPage, questions, setPetName } = useContext(QuizContext);
 
   let landingPageHandler = () => {
     setLandingPage(false);
@@ -36,6 +35,15 @@ const LandingPage = () => {
     <Row>
       <Col className="vh-100 d-flex flex-column justify-content-center align-items-center">
         <h1>Perfect Pet Quiz</h1>
+        <input
+          type="text"
+          className="form-control w-25 m-3 text-center"
+          placeholder="Name of the pet"
+          aria-label="Name of the pet"
+          aria-describedby="basic-addon2"
+          onChange={(e) => setPetName(e.target.value)}
+        />
+
         <div>
           <Button
             onClick={() => landingPageHandler()}
