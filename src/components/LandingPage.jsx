@@ -22,7 +22,8 @@ const LandingPage = () => {
     if (petName.length < config.petNameMaxLength) {
       setPetName(e.target.value);
     } else {
-      e.target.value = petName;
+      e.target.value = e.target.value.slice(0, -1);
+      setPetName(e.target.value);
       toast.info(`Maximum name length is ${config.petNameMaxLength}`);
     }
   };
