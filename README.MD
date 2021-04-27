@@ -1,1 +1,1 @@
-# react quiz
+# React Quiz
