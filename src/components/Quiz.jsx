@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { getQuestions } from "../services/questions";
-import SingleQuestion from "./SingleQuestion";
+import QuizLogic from "./QuizLogic";
 import LandingPage from "./LandingPage";
 import QuizContext from "./QuizContext";
 
 const Quiz = () => {
   let [questions, setQuestions] = useState([]);
-  let [currentStage, setCurrentStage] = useState(0);
+  let [landingPage, setLandingPage] = useState(true);
 
   useEffect(() => {
     setQuestions(getQuestions());
@@ -16,13 +16,12 @@ const Quiz = () => {
   return (
     <QuizContext.Provider
       value={{
-        currentStage: 0,
-        setCurrentStage,
+        landingPage: true,
+        setLandingPage,
       }}
     >
       <Container>
-        {currentStage === 0 ? <LandingPage /> : ""}
-        {currentStage === 1 ? <SingleQuestion questions={questions} /> : ""}
+        {landingPage ? <LandingPage /> : <QuizLogic questions={questions} />}
       </Container>
     </QuizContext.Provider>
   );
