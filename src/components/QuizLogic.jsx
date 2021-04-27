@@ -40,20 +40,42 @@ const QuizLogic = ({ questions }) => {
           My pet {answers[0]}, and althrough he likes to {answers[1]}, he really
           hates {answers[2]}.
         </p>
-        <Button className="btn-lg" onClick={handleResetClick}>
-          Reset
-        </Button>
+        <div>
+          <Button className="btn-lg mr-1" onClick={handleResetClick}>
+            Reset
+          </Button>
+          <Button className="btn-lg" onClick={handleScrambleClick}>
+            Scramble
+          </Button>
+        </div>
       </>
     );
+  };
+
+  let handleAnswerClick = (choice) => {
+    setAnswers([...answers, choice]);
+    setCurrentIndex(currentIndex + 1);
   };
 
   let handleResetClick = () => {
     setLandingPage(true);
   };
 
-  let handleAnswerClick = (choice) => {
-    setAnswers([...answers, choice]);
-    setCurrentIndex(currentIndex + 1);
+  let handleScrambleClick = () => {
+    setAnswers(
+      answers.map((answer) => {
+        let answerArr = answer.split("");
+        for (let i = 0; i < answerArr.length; i++) {
+          let randIndex = Math.floor(Math.random() * answerArr.length);
+
+          let temp = answerArr[i];
+          answerArr[i] = answerArr[randIndex];
+          answerArr[randIndex] = temp;
+        }
+        answer = answerArr.join("");
+        return answer;
+      })
+    );
   };
 
   return (
