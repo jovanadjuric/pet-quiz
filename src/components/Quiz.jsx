@@ -18,6 +18,7 @@ const Quiz = () => {
       value={{
         landingPage: true,
         setLandingPage,
+        questions,
       }}
     >
       <Container>

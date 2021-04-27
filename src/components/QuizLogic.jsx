@@ -53,7 +53,6 @@ const QuizLogic = ({ questions }) => {
 
   let handleAnswerClick = (choice) => {
     setAnswers([...answers, choice]);
-
     setCurrentIndex(currentIndex + 1);
   };
 
