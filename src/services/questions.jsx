@@ -1,21 +1,18 @@
 const questions = [
   {
-    _id: 1,
+    _id: 0,
     question: "Your perfect pet is:",
-    possibleAnswers: ["Small", "Big"],
-    currentQuestion: true,
+    choices: ["Small", "Big"],
+  },
+  {
+    _id: 1,
+    question: "Your perfect pet likes to:",
+    choices: ["Eat a lot", "Run a lot"],
   },
   {
     _id: 2,
-    question: "Your perfect pet likes to:",
-    possibleAnswers: ["Eat a lot", "Run a lot"],
-    currentQuestion: false,
-  },
-  {
-    _id: 3,
     question: "Your perfect pet hates:",
-    possibleAnswers: ["Hot weather", "Cold weather"],
-    currentQuestion: false,
+    choices: ["Hot weather", "Cold weather"],
   },
 ];
 

@@ -4,50 +4,39 @@ import QuizContext from "./QuizContext";
 
 const SingleQuestion = ({ questions }) => {
   let { setCurrentStage } = useContext(QuizContext);
+  let [currentIndex, setCurrentIndex] = useState(0);
 
   let displayQuestions = () => {
-    // let { question, possibleAnswers };
-    for (let i = 0; i < questions.length; i++) {
-      let { currentQuestion, question, possibleAnswers } = questions[i];
-      if (currentQuestion) {
-        return (
-          <>
-            <h1>{question}</h1>
-            <div>
-              {possibleAnswers.map((answer) => {
-                return (
-                  <Button
-                    className="mr-2"
-                    key={answer}
-                    onClick={answerClick(answer)}
-                  >
-                    {answer}
-                  </Button>
-                );
-              })}
-            </div>
-          </>
-        );
-      }
+    if (currentIndex < questions.length) {
+      let { question, choices } = questions[currentIndex];
+      return (
+        <>
+          <h3>{question}</h3>
+          {choices.map((choice) => {
+            return (
+              <Button onClick={(e) => answerClick(choice)} key={choice}>
+                {choice}
+              </Button>
+            );
+          })}
+        </>
+      );
+    } else {
+      displayResult();
     }
-
-    // return (
-    //   <>
-    //     <h1>{question}</h1>
-    //     <div>
-    //       {possibleAnswers.map((answer) => (
-    //         <Button className="mr-2" key={answer} onClick={answerClick()}>
-    //           {answer}
-    //         </Button>
-    //       ))}
-    //     </div>
-    //   </>
-    // );
   };
 
-  let answerClick = (answer) => {
-    // setCurrentQuestion(++currentQuestion);
-    console.log(answer);
+  let answerClick = (choice) => {
+    console.log(choice);
+    setCurrentIndex(currentIndex + 1);
+  };
+
+  let displayResult = () => {
+    return (
+      <>
+        My pet {}, and althrough he likes to {}, he really hates {}.
+      </>
+    );
   };
 
   return (
